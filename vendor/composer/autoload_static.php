@@ -405,7 +405,9 @@ class ComposerStaticInit1f29913f46198c407243a13cf0bdffc0
     );
 
     public static $classMap = array (
+        'App\\Clientes' => __DIR__ . '/../..' . '/app/Clientes.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
+        'App\\Estoque' => __DIR__ . '/../..' . '/app/Estoque.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\Auth\\ConfirmPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ConfirmPasswordController.php',
         'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
