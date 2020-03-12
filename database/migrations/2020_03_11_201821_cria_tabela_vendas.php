@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTableEstoque extends Migration
+class CriaTabelaVendas extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateTableEstoque extends Migration
      */
     public function up()
     {
-        Schema::create('estoque', function (Blueprint $table) {
+        Schema::create('Vendas', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nomeItem');
-            $table->integer('qtdItem');
-            $table->integer('vlrItem');
-            $table->integer('qtdTotal');
+            $table->bigInteger('cliente_id')->unsigned();
+            $table->foreign('cliente_id')->references('id')->on('Clientes')->onDelete('cascade');
+            $table->date('data_da_venda');
+            $table->bigInteger('vendedor_id')->unsigned();
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class CreateTableEstoque extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('estoque');
+        Schema::dropIfExists('Vendas');
     }
 }
