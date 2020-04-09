@@ -18,3 +18,7 @@ Route::get('/', function () {
 Route::get('/avisos', function(){
     return view('avisos', ['nome'=>'Mikael', 'mostrar' => false, 'avisos'=>[['id' => 1, 'texto'=> 'aviso 1'], ['id'=>2, 'texto'=>'aviso 2']]]);
 });
+
+Route::get('/inicial', function(){
+    return view('layouts.menu');
+});
