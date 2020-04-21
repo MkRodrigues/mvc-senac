@@ -69,6 +69,8 @@
                 <div class="top-right links">
                     @auth
                         <a href="{{ url('/home') }}">Home</a>
+                        <a href="{{ url('clientes/listar') }}">Listar Clientes</a>
+                        <a href="{{ url('clientes/create') }}">Cadastrar Clientes</a>
                     @else
                         <a href="{{ route('login') }}">Login</a>
 
