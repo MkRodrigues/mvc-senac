@@ -26,20 +26,16 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-// O atributo Middleware pode ser atribuido ao mesmo array com prefixo, pois o grupo de rotas não aceita o uso da Construtor 
+// O atributo Middleware pode ser atribuido ao mesmo array com prefixo, pois o grupo de rotas não aceita o uso do Construtor 
 Route::group(['prefix' => 'clientes', 'middleware' => ['auth']], function () {
     Route::get('listar', 'ClientesController@listar');
     Route::get('create', 'ClientesController@create');
     Route::post('store-clientes', 'ClientesController@store');
 });
 
-// Route::group(['middleware' => ['auth']], function () {
-//     Route::resource('users', 'UserController');
-// });
-
-
-
 Route::group(['middleware' => ['auth']], function () {
-        Route::resource('users', 'UserController');
-        Route::resource('roles', 'RoleController');
-    });
+    Route::resource('users', 'UserController');
+    Route::resource('roles', 'RoleController');
+});
+
+

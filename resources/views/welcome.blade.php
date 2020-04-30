@@ -72,6 +72,7 @@
                         <a href="{{ url('clientes/listar') }}">Listar Clientes</a>
                         <a href="{{ url('clientes/create') }}">Cadastrar Clientes</a>
                         <a href="{{ url('/users')}}">Usuários</a>
+                        <a href="{{ url('/roles')}}">Permissões</a>
                     @else
                         <a href="{{ route('login') }}">Login</a>
 
