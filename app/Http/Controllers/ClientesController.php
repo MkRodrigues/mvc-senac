@@ -5,28 +5,29 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Clientes;
+use App\Http\Requests\CreateClientesRequest;
+use App\Http\Requests\EditClientesRequest;
 
 class ClientesController extends Controller
 {
 
-    public function __controller()
-    {
-        $this->middleware('auth');
-    }
-
-    // index
-    // create
-    // store
-    // show
-    // edit
-    // update
-    // destroy
-
-
     public function index(Request $request)
     {
-        $data = Clientes::orderBy('id', 'DESC')->paginate(5);
-        return view('clientes.index', compact('data'))->with('i', ($request->input('page', 1) - 1) * 5);
+        $clientes = Clientes::orderBy('id', 'DESC')->paginate(15);
+        return view('clientes.index', compact('clientes'))->with('i', ($request->input('page', 1) - 1) * 5);
+    }
+
+    public function create()
+    {
+        return view('clientes.create');
+    }
+
+
+    public function store(CreateClientesRequest $request)
+    {
+        Clientes::create($request->all());
+        session()->flash('success', 'Cliente criado com sucesso!');
+        return redirect(route('clientes.index'));
     }
 
 
@@ -35,39 +36,29 @@ class ClientesController extends Controller
         return view('clientes.show')->with('cliente', Clientes::find($id));
     }
 
-    public function edit($id)
+
+    public function edit(Clientes $cliente)
     {
-        $user = Clientes::find($id);
-        return view('clientes.edit', compact('cliente'));
+        return view('clientes.edit')->with('cliente', $cliente);
     }
 
 
-
-
-
-    public function listar()
+    public function update(Request $request, Clientes $cliente)
     {
-        $clientes = Clientes::all();
-        return view('clientes.listar', ['clientes' => $clientes]);
+        $cliente->nome = $request->nome;
+        $cliente->endereco = $request->endereco;
+        $cliente->email = $request->email;
+        $cliente->telefone = $request->telefone;
+        $cliente->save();
+
+        session()->flash('success', 'Cliente editado com sucesso!');
+        return redirect(route('clientes.index'));
     }
 
-    public function create()
+
+    public function destroy(Clientes $cliente)
     {
-        return view('clientes.create');
-    }
-
-    public function store()
-    {
-        $data = request()->all();
-        $clientes = new Clientes();
-        // dd($data);
-
-        $clientes->nome = $data['name'];
-        $clientes->endereco = $data['address'];
-        $clientes->email = $data['email'];
-        $clientes->telefone = $data['phone'];
-
-        $clientes->save();
-        return redirect('clientes/listar');
+        $cliente->delete();
+        return redirect()->route('clientes.index')->with('success', 'Cliente apagado com Sucesso!');
     }
 }

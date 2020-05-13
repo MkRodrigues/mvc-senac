@@ -1,18 +1,20 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+@extends('layouts.app')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Mostrar</title>
-</head>
+@section('content')
 
 <body>
-<h1>$cliente->nome</h1>
-
-
+    <div class="container col-md-6 my-5">
+        <h1 class="text-primary">{{$cliente->nome}}</h1>
+        <span>Endereço: </span>
+        <p>{{$cliente->endereco}}</p>
+        <span>E-mail: </span>
+        <p>{{$cliente->email}}</p>
+        <span>Telefone: </span>
+        <p>{{$cliente->telefone}}</p>
+        <a href="{{route('clientes.index')}}" class="btn btn-primary">Voltar</a>
+    </div>
 
 </body>
 
 </html>
+@endsection

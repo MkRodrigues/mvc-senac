@@ -9,11 +9,11 @@
         </div>
         <div class="pull-right">
 
-        @can('role-create')
+            @can('role-create')
 
             <a class="btn btn-success" href="{{ route('roles.create') }}"> + Novo perfil</a>
 
-        @endcan
+            @endcan
 
         </div>
     </div>
@@ -22,19 +22,19 @@
 
 @if ($message = Session::get('success'))
 
-    <div class="alert alert-success">
-        <p>{{ $message }}</p>
-    </div>
+<div class="alert alert-success">
+    <p>{{ $message }}</p>
+</div>
 
 @endif
 
 
 <table class="table table-bordered">
-  <tr>
-     <th>No</th>
-     <th>Name</th>
-     <th width="280px">Action</th>
-  </tr>
+    <tr>
+        <th>No</th>
+        <th>Name</th>
+        <th width="280px">Action</th>
+    </tr>
 
     @foreach ($roles as $key => $role)
 
@@ -46,17 +46,17 @@
 
             @can('role-edit')
 
-                <a class="btn btn-primary" href="{{ route('roles.edit',$role->id) }}">Editar</a>
+            <a class="btn btn-primary" href="{{ route('roles.edit',$role->id) }}">Editar</a>
 
             @endcan
 
             @can('role-delete')
 
-                {!! Form::open(['method' => 'DELETE','route' => ['roles.destroy', $role->id],'style'=>'display:inline']) !!}
+            {!! Form::open(['method' => 'DELETE','route' => ['roles.destroy', $role->id],'style'=>'display:inline']) !!}
 
-                    {!! Form::submit('Apagar', ['class' => 'btn btn-danger']) !!}
+            {!! Form::submit('Apagar', ['class' => 'btn btn-danger']) !!}
 
-                {!! Form::close() !!}
+            {!! Form::close() !!}
 
             @endcan
 
