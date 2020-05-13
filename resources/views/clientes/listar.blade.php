@@ -20,6 +20,7 @@
                 <th scope="col">Endere&ccedil;o</th>
                 <th scope="col">E-mail</th>
                 <th scope="col">Telefone</th>
+                <th>Ações</th>
             </tr>
 
             @foreach($clientes as $cliente)
@@ -28,6 +29,17 @@
                 <td>{{$cliente -> endereco}}</td>
                 <td>{{$cliente -> email}}</td>
                 <td>{{$cliente -> telefone}}</td>
+                <td>
+                    <a class="btn btn-success" href="{{route('clientes.show', $cliente->id)}}">Mostrar</a>
+                    <a class="btn btn-primary" href="#">Editar</a>
+                    <a class="btn btn-danger" href="#">Excluir</a>
+
+                </td>
+
+
+
+            <tr>
+            </tr>
             </tr>
             @endforeach
 

@@ -14,6 +14,36 @@ class ClientesController extends Controller
         $this->middleware('auth');
     }
 
+    // index
+    // create
+    // store
+    // show
+    // edit
+    // update
+    // destroy
+
+
+    public function index(Request $request)
+    {
+        $data = Clientes::orderBy('id', 'DESC')->paginate(5);
+        return view('clientes.index', compact('data'))->with('i', ($request->input('page', 1) - 1) * 5);
+    }
+
+
+    public function show($id)
+    {
+        return view('clientes.show')->with('cliente', Clientes::find($id));
+    }
+
+    public function edit($id)
+    {
+        $user = Clientes::find($id);
+        return view('clientes.edit', compact('cliente'));
+    }
+
+
+
+
 
     public function listar()
     {
@@ -21,7 +51,8 @@ class ClientesController extends Controller
         return view('clientes.listar', ['clientes' => $clientes]);
     }
 
-    public function create(){
+    public function create()
+    {
         return view('clientes.create');
     }
 
