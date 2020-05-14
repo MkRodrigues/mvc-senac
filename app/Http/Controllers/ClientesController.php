@@ -11,6 +11,14 @@ use App\Http\Requests\EditClientesRequest;
 class ClientesController extends Controller
 {
 
+    function __construct()
+    {
+        $this->middleware('permission:cliente-list', ['only' => ['index', 'show']]);
+        $this->middleware('permission:cliente-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:cliente-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:cliente-delete', ['only' => ['destroy']]);
+    }
+
     public function index(Request $request)
     {
         $clientes = Clientes::orderBy('id', 'DESC')->paginate(15);
@@ -43,16 +51,20 @@ class ClientesController extends Controller
     }
 
 
-    public function update(Request $request, Clientes $cliente)
+    public function update(Request $request, $id)
     {
-        $cliente->nome = $request->nome;
-        $cliente->endereco = $request->endereco;
-        $cliente->email = $request->email;
-        $cliente->telefone = $request->telefone;
-        $cliente->save();
+        $this->validate($request, [
+            'nome' => 'required',
+            'endereco' => 'required',
+            'email' => 'required',
+            'telefone' => 'required'
+        ]);
 
-        session()->flash('success', 'Cliente editado com sucesso!');
-        return redirect(route('clientes.index'));
+        $cliente = Clientes::find($id);
+        $input = $request->all();
+        $cliente->update($input);
+
+        return redirect()->route('clientes.index')->with('success', 'Cliente atualizado com sucesso!');
     }
 
 
